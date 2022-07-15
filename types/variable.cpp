@@ -1,4 +1,5 @@
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnusedValue"
 #pragma ide diagnostic ignored "modernize-avoid-bind"
 #pragma ide diagnostic ignored "performance-unnecessary-copy-initialization"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
@@ -35,7 +36,7 @@ void test_template_parameter_type(T t) {
 class myClass {
 };
 
-myClass getClass();
+myClass getClass() { return {}; }
 
 void test_custom_class() {
     auto mc = getClass(); // myClass
@@ -84,6 +85,8 @@ void test_std_type() {
     auto aMap = m; // map<char, bool>
 
     const auto tuple = std::make_tuple(1, 'a', 2.3); // const tuple<int, char, double>
+
+    auto aList = {1, 2, 3, 4}; // initializer_list<int>
 }
 
 
@@ -128,6 +131,18 @@ int add(int x, int y) { return x + y; }
 void test_bind_to_lambda(int num) {
     int x = 2;
     auto clj = std::bind(add, x, num); // __bind<int (&)(int, int), int&, int&>
+}
+
+
+template<typename T, typename U>
+auto doOperation(T t, U u) -> decltype(t + u) {
+    return t + u;
+}
+
+void test_fun_type() {
+    auto op = doOperation(3, 1); //  int
+    auto op1 = doOperation(3L, 0); // long
+    auto op2 = doOperation(3.0, 0); // double
 }
 
 #pragma clang diagnostic pop
