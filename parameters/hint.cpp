@@ -45,5 +45,27 @@ void check_constructor_call() {
     std::string s2{};
 }
 
+void foo(int Params...) {}
+
+void check_variadic_parameter() {
+    foo(5, 6); // Params
+}
+
+
+template<typename T>
+void tp_function_with_one_parameter(T number) {}
+
+void check_template_function_call() {
+    tp_function_with_one_parameter(100); // number
+}
+
+#define FOO(A) A
+
+void check_macro() {
+    FOO(100); // ?
+}
+
+
+
 
 #pragma clang diagnostic pop

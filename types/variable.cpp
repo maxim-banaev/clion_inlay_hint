@@ -11,7 +11,9 @@
 #include <map>
 #include <memory>
 #include <tuple>
-
+#ifdef _WIN32
+#include <functional>
+#endif
 void test_basic_types() {
     int i = 1;
     auto aInt = i; // int
