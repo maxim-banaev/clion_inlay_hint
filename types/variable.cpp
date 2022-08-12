@@ -11,9 +11,13 @@
 #include <map>
 #include <memory>
 #include <tuple>
+#include <unordered_map>
+#include <iostream>
+
 #ifdef _WIN32
 #include <functional>
 #endif
+
 void test_basic_types() {
     int i = 1;
     auto aInt = i; // int
@@ -47,19 +51,19 @@ void test_custom_class() {
 
 void test_pointers() {
 
-    int * pInt = nullptr;
+    int *pInt = nullptr;
     auto aInt = pInt; // int*
 
-    int ** ppInt = nullptr;
+    int **ppInt = nullptr;
     auto aIInt = ppInt; // int**
 
-    const int * pcInt = nullptr;
+    const int *pcInt = nullptr;
     auto apcInt = pcInt; // const int*
 
-    int * const cpInt = nullptr;
+    int *const cpInt = nullptr;
     auto acpInt = cpInt; // int*
 
-    const char * const * pChar = nullptr;
+    const char *const *pChar = nullptr;
     auto apChar = pChar; // const char *const*
 
     bool b[] = {true, false};
@@ -68,10 +72,11 @@ void test_pointers() {
     auto aNull = nullptr; // nullptr_t
 }
 
-void test_string() {
+void test_string(const std::string &str) {
     std::string s("foo");
     auto aString = s; // string
 
+    const auto &refStr = str; // const string&
     auto wStr = std::to_wstring(2137LL); // wstring
 }
 
@@ -92,16 +97,25 @@ void test_std_type() {
 }
 
 
+void test_pair(const std::unordered_map<std::string, int> &v) {
+    std::cout << std::boolalpha;
+
+    for (const auto &item: v) { // const pair<const string, int>&
+        std::cout << "\t\t - " << "";//item.first;
+    }
+}
+
+
 void test_structured_bindings() {
     int a = 1, b = 2;
-    const auto&[x, // int&
-                y  // int&
-                ] = std::tie(a, b);
+    const auto &[x, // int&
+            y  // int&
+    ] = std::tie(a, b);
 
-    const auto& [i, // const int
-                 c, // const char
-                 d // const double
-                 ] = std::make_tuple(1, 'a', 2.3);
+    const auto &[i, // const int
+            c, // const char
+            d // const double
+    ] = std::make_tuple(1, 'a', 2.3);
 }
 
 
@@ -130,6 +144,7 @@ void test_loop() {
 }
 
 int add(int x, int y) { return x + y; }
+
 void test_bind_to_lambda(int num) {
     int x = 2;
     auto clj = std::bind(add, x, num); // __bind<int (&)(int, int), int&, int&>
