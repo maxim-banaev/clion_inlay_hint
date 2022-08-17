@@ -12,6 +12,7 @@
 #include <memory>
 #include <tuple>
 #include <unordered_map>
+#include <unordered_set>
 #include <iostream>
 
 #ifdef _WIN32
@@ -88,20 +89,25 @@ void test_std_type() {
     std::array a = {1.0, 2.0, 3.0};
     auto aArr = a; // array<double, 3>
 
-    std::map<char, bool> m = {{'c', true}};
-    auto aMap = m; // map<char, bool>
+    std::map<std::string, bool> m = {{"c", true}};
+    auto aMap = m; // map<string, bool>
 
     const auto tuple = std::make_tuple(1, 'a', 2.3); // const tuple<int, char, double>
+    const auto tuple1 = std::make_tuple(1, std::string("b"), 2.3); // const tuple<int, string, double>
 
     auto aList = {1, 2, 3, 4}; // initializer_list<int>
 }
 
 
-void test_pair(const std::unordered_map<std::string, int> &v) {
+void test_pair(const std::unordered_map<std::string, int> &v, const std::multimap<std::string, int> &s) {
     std::cout << std::boolalpha;
 
     for (const auto &item: v) { // const pair<const string, int>&
-        std::cout << "\t\t - " << "";//item.first;
+        std::cout << "\t\t - " << item.first;
+    }
+
+    for (const auto &item: s) {  // const pair<const string, int>&
+        std::cout << "\t\t - " << item.first;
     }
 }
 
