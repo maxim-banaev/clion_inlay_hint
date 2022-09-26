@@ -4,7 +4,7 @@
 void might_modify(int &arg);
 
 void check_non_const_reference(int argc) {
-    might_modify(argc); // &
+  might_modify(argc); // &
 }
 
 #pragma clang diagnostic pop
