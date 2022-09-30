@@ -64,8 +64,8 @@ struct Employee : public Person {
 };
 
 void check_designated_initializer() {
-  Employee emp{{"John", "Wick", 40},
-               5000}; // .name ... .surname ... .age ... .salary
+  Employee emp{{"John", "Wick", 40}, // .name ... .surname ... .age
+               5000}; // ... .salary
 }
 
 #pragma clang diagnostic pop

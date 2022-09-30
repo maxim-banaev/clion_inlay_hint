@@ -20,8 +20,8 @@ void check_function_call() {
   // negative cases
   int number = 100;
   function_with_one_parameter(number);
-  function_with_one_parameter(/*number=*/100);
-  function_with_one_parameter(/*number*/ 100);
+  function_with_one_parameter(/*number=*/100); // none
+  function_with_one_parameter(/*number*/ 100); // none
 
   function_with_one_default_parameter();
 }
