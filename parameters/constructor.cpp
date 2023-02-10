@@ -39,7 +39,7 @@ struct Foo {
 
 struct Bar {
   Foo f;
-  Bar() : f{1, 2} {} // .x .y
+  Bar() : f{1, 2} {} // .x ... .y
 };
 
 struct Bat {
@@ -65,7 +65,14 @@ struct Employee : public Person {
 
 void check_designated_initializer() {
   Employee emp{{"John", "Wick", 40}, // .name ... .surname ... .age
-               5000}; // ... .salary
+               5000};                // ... .salary
+}
+
+void check_unnamed_structure() {
+  const struct {
+    float x;
+    float y;
+  } point = {1, 1}; // .x ... .y
 }
 
 #pragma clang diagnostic pop

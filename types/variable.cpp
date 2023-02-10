@@ -158,4 +158,12 @@ void test_fun_type() {
   auto op2 = doOperation(3.0, 0); // double
 }
 
+typedef struct {
+  int x;
+} Point;
+Point getPoint();
+
+void test_typedef() {
+  auto p = getPoint(); // Point
+}
 #pragma clang diagnostic pop

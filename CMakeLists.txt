@@ -8,6 +8,7 @@ add_executable(clion_inlay_hint main.cpp
         types/lambdas.cpp
         types/return.cpp
         types/parameter.cpp
+        types/template.cpp
 
         parameters/enum.cpp
         parameters/constructor.cpp
