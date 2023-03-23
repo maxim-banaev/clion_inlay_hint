@@ -104,7 +104,7 @@ void test_pair(const std::unordered_map<std::string, int> &v,
     std::cout << "\t\t - " << item.first;
   }
 
-  for (const auto &item : s) { // const pair<const string, int>&
+  for (const auto &item : s) { // pair<const string, int> const &
     std::cout << "\t\t - " << item.first;
   }
 }
